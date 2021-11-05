@@ -293,6 +293,10 @@ class _ScreenSettingAddCustomerWebState
                 ],
               ),
             ),
+      // floatingActionButton: FloatingActionButton.extended(
+      //   onPressed: () {},
+      //   label: const Text("ABCD"),
+      // ),
     );
   }
 
@@ -335,6 +339,8 @@ class _ScreenSettingAddCustomerWebState
       );
     } else {
       return Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           SingleChildScrollView(
             child: Center(
@@ -529,6 +535,10 @@ class _ScreenSettingAddCustomerWebState
                     .toList(),
               ),
             ),
+          ),
+          FloatingActionButton.extended(
+            onPressed: () {},
+            label: const Text("DATA"),
           ),
         ],
       );
