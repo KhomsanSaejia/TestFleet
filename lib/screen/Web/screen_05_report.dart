@@ -9,7 +9,7 @@ import 'package:fleetdemo/utility/myconstant.dart';
 import 'package:flutter/material.dart';
 // import 'package:open_file/open_file.dart';
 // import 'package:path_provider/path_provider.dart';
-import 'package:syncfusion_flutter_xlsio/xlsio.dart';
+import 'package:syncfusion_flutter_xlsio/xlsio.dart' as excel;
 import 'package:universal_html/html.dart' show AnchorElement;
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'dart:convert';
@@ -689,32 +689,43 @@ class _ScreenReportWebState extends State<ScreenReportWeb> {
   }
 
   Future<void> createExcel() async {
-    final Workbook workbook = Workbook();
+    final excel.Workbook workbook = excel.Workbook();
 
-    final Worksheet sheet = workbook.worksheets[0];
-    final Range range = sheet.getRangeByName('A1:O1');
-    sheet.getRangeByName('A1').setText('รายการที่');
-    sheet.getRangeByName('B1').setText('ใบงาน');
-    sheet.getRangeByName('C1').setText('วันที่สร้าง');
-    sheet.getRangeByName('D1').setText('วันที่เติมเสร็จ');
-    sheet.getRangeByName('E1').setText('ชื่อพนักงาน');
-    sheet.getRangeByName('F1').setText('ทะเบียนรถ');
-    sheet.getRangeByName('G1').setText('ลิมิต ลิตร');
-    sheet.getRangeByName('H1').setText('ลิมิต บาท');
-    sheet.getRangeByName('I1').setText('จำนวนบาท');
-    sheet.getRangeByName('J1').setText('จำนวนลิตร');
-    sheet.getRangeByName('K1').setText('ราคา');
-    sheet.getRangeByName('L1').setText('ตู้จ่าย');
-    sheet.getRangeByName('M1').setText('เลขไมล์ล่าสุด');
-    sheet.getRangeByName('N1').setText('สถานะใบงาน');
-    sheet.getRangeByName('O1').setText('ปลายทาง');
-    range.autoFitRows();
-    range.autoFitColumns();
-    // sheet.autoFitRow(1);
-    // sheet.autoFitColumn(1);
+    final excel.Worksheet sheet = workbook.worksheets[0];
+
+    // sheet.getRangeByName('A1').setText('รายการที่');
+    // sheet.getRangeByName('B1').setText('ใบงาน');
+    // sheet.getRangeByName('C1').setText('วันที่สร้าง');
+    // sheet.getRangeByName('D1').setText('วันที่เติมเสร็จ');
+    // sheet.getRangeByName('E1').setText('ชื่อพนักงาน');
+    // sheet.getRangeByName('F1').setText('ทะเบียนรถ');
+    // sheet.getRangeByName('G1').setText('ลิมิต ลิตร');
+    // sheet.getRangeByName('H1').setText('ลิมิต บาท');
+    // sheet.getRangeByName('I1').setText('จำนวนบาท');
+    // sheet.getRangeByName('J1').setText('จำนวนลิตร');
+    // sheet.getRangeByName('K1').setText('ราคา');
+    // sheet.getRangeByName('L1').setText('ตู้จ่าย');
+    // sheet.getRangeByName('M1').setText('เลขไมล์ล่าสุด');
+    // sheet.getRangeByName('N1').setText('สถานะใบงาน');
+    // sheet.getRangeByName('O1').setText('ปลายทาง');
+
+    sheet.getRangeByName('A1').setText('No');
+    sheet.getRangeByName('B1').setText('Invoice');
+    sheet.getRangeByName('C1').setText('Date Create');
+    sheet.getRangeByName('D1').setText('Date Finish');
+    sheet.getRangeByName('E1').setText('Emp Name');
+    sheet.getRangeByName('F1').setText('Car Regist');
+    sheet.getRangeByName('G1').setText('Limit Volumn');
+    sheet.getRangeByName('H1').setText('Limit Amount');
+    sheet.getRangeByName('I1').setText('Amount');
+    sheet.getRangeByName('J1').setText('Volumn');
+    sheet.getRangeByName('K1').setText('Price');
+    sheet.getRangeByName('L1').setText('Pump ID');
+    sheet.getRangeByName('M1').setText('Last Milage');
+    sheet.getRangeByName('N1').setText('Status');
+    sheet.getRangeByName('O1').setText('Destination');
 
     for (var item in reportmodels) {
-      // final Range range1 = sheet.getRangeByName('A$count:O$count');
       sheet.getRangeByName('A$count').setText(item.id.toString());
       sheet.getRangeByName('B$count').setText(item.recRef);
       sheet.getRangeByName('C$count').setText(item.recCreate);
@@ -730,11 +741,25 @@ class _ScreenReportWebState extends State<ScreenReportWeb> {
       sheet.getRangeByName('M$count').setText(item.newMileage);
       sheet.getRangeByName('N$count').setText(item.recStatus);
       sheet.getRangeByName('O$count').setText(item.desination);
-      // range1.autoFitColumns();
       setState(() {
         count = count + 1;
       });
     }
+    sheet.autoFitColumn(1);
+    sheet.autoFitColumn(2);
+    sheet.autoFitColumn(3);
+    sheet.autoFitColumn(4);
+    sheet.autoFitColumn(5);
+    sheet.autoFitColumn(6);
+    sheet.autoFitColumn(7);
+    sheet.autoFitColumn(8);
+    sheet.autoFitColumn(9);
+    sheet.autoFitColumn(10);
+    sheet.autoFitColumn(11);
+    sheet.autoFitColumn(12);
+    sheet.autoFitColumn(13);
+    sheet.autoFitColumn(14);
+    sheet.autoFitColumn(15);
 
     final List<int> bytes = workbook.saveAsStream();
     workbook.dispose();
